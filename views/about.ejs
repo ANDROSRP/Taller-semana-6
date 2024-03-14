@@ -1,0 +1,116 @@
+<!-- about.ejs -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      padding: 40px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      margin: 20px;
+      max-width: 800px;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #555;
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    li {
+      margin: 0 15px;
+    }
+
+    /* Estilos para los botones */
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    }
+
+    .button-primary {
+      background-color: #007bff;
+      color: #ffffff;
+    }
+
+    .button-secondary {
+      background-color: #ffffff;
+      color: #007bff;
+      border: 2px solid #007bff;
+    }
+
+    .button:hover {
+      background-color: #0056b3;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1><%= title %></h1>
+    <p>
+      Bienvenido a nuestra plataforma. Somos un equipo apasionado por la tecnología
+      y estamos comprometidos a brindar soluciones innovadoras para nuestros usuarios.
+      Con sede en el corazón de la industria tecnológica, nos esforzamos por ofrecer
+      servicios y productos de alta calidad.
+    </p>
+    <p>
+      Nuestro equipo está formado por expertos en diversas áreas, desde desarrollo de software
+      hasta diseño de experiencia de usuario. Trabajamos juntos para proporcionar soluciones
+      efectivas que impulsen el éxito de nuestros clientes.
+    </p>
+    <img src="Code1.jpg" alt="Coding">
+    
+    <!-- Enlaces a otras páginas como botones -->
+    <ul>
+      <li><a href="/" class="button button-primary">Inicio</a></li>
+      <li><a href="/contact" class="button button-secondary">Contáctanos</a></li>
+      <li><a href="/submit" class="button button-primary">Enviar datos</a></li>
+    </ul>
+  </div>
+</body>
+</html>
