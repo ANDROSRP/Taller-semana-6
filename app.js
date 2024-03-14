@@ -9,6 +9,11 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
+const users = [
+  { username: 'usuario1', password: 'contrasena1' },
+  { username: 'usuario2', password: 'contrasena2' }
+];
+
 // Configuración de multer para la subida de archivos
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -59,9 +64,12 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
 
+  // Buscar el usuario en la lista de usuarios
+  const user = users.find(user => user.username === username && user.password === password);
+
   // Verifica las credenciales (fijas para estudio)
-  if (username === 'usuario' && password === 'contrasena') {
-    req.session.user = { username };
+  if (user) {
+    req.session.user = { username: user.username };
     res.redirect('/');
   } else {
     res.render('login', { title: 'Iniciar sesión', error: 'Credenciales inválidas' });
@@ -144,13 +152,13 @@ app.post('/contact', (req, res) => {
   };
 
   // Convertir el objeto de datos a formato de cadena
-  const dataString = JSON.stringify(data, null, 2);
+  const dataString = JSON.stringify(data, null, 2) + '\n';
 
   // Ruta del archivo de destino
   const filePath = path.join(__dirname, 'public', 'contact_data.txt');
 
   // Guardar los datos en el archivo
-  fs.writeFile(filePath, dataString, (err) => {
+  fs.writeFile(filePath, dataString, { flag: 'a' }, (err) => {
     if (err) {
       console.error('Error al guardar los datos:', err);
       return res.status(500).send('Error al guardar los datos');
