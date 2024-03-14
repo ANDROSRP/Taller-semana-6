@@ -20,7 +20,28 @@ const storage = multer.diskStorage({
     cb(null, 'files'); // Carpeta donde se guardarán los archivos
   },
   filename: (req, file, cb) => {
-    cb(null, file.originalname); // Puedes cambiar la forma en que se nombra el archivo si es necesario
+    const originalName = file.originalname;
+    const ext = path.extname(originalName);
+    const basename = path.basename(originalName, ext);
+    const folder = 'files';
+
+    // Función para renombrar el archivo si ya existe
+    function renameFile(folder, basename, ext, index) {
+      const newName = `${basename}_${index}${ext}`;
+      const newFilePath = path.join(folder, newName);
+      if (fs.existsSync(newFilePath)) {
+        return renameFile(folder, basename, ext, index + 1);
+      }
+      return newName;
+    }
+
+    // Verificar si el archivo ya existe
+    if (fs.existsSync(path.join(folder, originalName))) {
+      const newName = renameFile(folder, basename, ext, 1);
+      cb(null, newName);
+    } else {
+      cb(null, originalName);
+    }
   }
 });
 
@@ -108,6 +129,8 @@ app.post('/submit', upload.single('archivo'), (req, res) => {
   // Verificar si se recibió un archivo
   if (!req.file) {
     return res.status(400).send('No se ha proporcionado un archivo');
+  }else{
+    res.send('Archivo subido correctamente');
   }
 
   // Obtener el archivo y la información del formulario
